@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - crmeasydb@localhost" uuid="72aef614-e829-4263-a4fd-9e86387b8b45">
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <schema-pattern>crmeasydb.pg_catalog crmeasydb.public</schema-pattern>
+      <default-schemas>crmeasydb.pg_catalog crmeasydb.public</default-schemas>
+    </data-source>
+  </component>
+</project>
