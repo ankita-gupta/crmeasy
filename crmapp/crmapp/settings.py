@@ -10,17 +10,37 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+from django.core.exceptions import ImproperlyConfigured
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Handling Key Import Errors
+def get_env_variable(var_name):
+    """ Get the environment variable or return exception """
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+# Get ENV VARIABLES key
+ENV_ROLE = get_env_variable('ENV_ROLE')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'al$2c%wlb&z(la@tbfjl7t&9dn#xg2q^z#!o+9u14=e!gdzg!='
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+#SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+if ENV_ROLE == 'development':
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
 
 TEMPLATE_DEBUG = True
 
@@ -36,7 +56,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crmapp.marketing',
+    # 'crmapp.marketing',
 )
 
 MIDDLEWARE_CLASSES = (
