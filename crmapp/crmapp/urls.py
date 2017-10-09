@@ -3,6 +3,8 @@ from django.contrib import admin
 from subscribers.views import subsciber_new
 from marketing.views import HomePage
 
+admin.autodiscover()
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'crmapp.views.home', name='home'),
