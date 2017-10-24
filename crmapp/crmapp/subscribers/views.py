@@ -34,6 +34,7 @@ def subsciber_new(request, template='subscribers/subscriber_new.html'):
                 stripe_customer = sub.charge(request, email, fee)
             except stripe.StripeError as e:
                 form._errors[NON_FIELD_ERRORS] = form.error_class([e.args[0]])
+                print(" form._errors[NON_FIELD_ERRORS]", form._errors[NON_FIELD_ERRORS])
                 return render(request, template,
                     {'form':form,
                      'STRIPE_PUBLISHABLE_KEY':settings.STRIPE_PUBLISHABLE_KEY}
