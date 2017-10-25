@@ -1572,6 +1572,33 @@
       <column name="viewowner" sqlType="name" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
       <column name="definition" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
     </table>
+    <table name="accounts_account" schema="public" catalog="crmeasydb" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYWNjb3VudHNfYWNjb3VudF9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="uuid" sqlType="varchar" precision="22" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="varchar" precision="80" scale="0" nullable="false" jdbcType="12"/>
+      <column name="desc" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address_one" sqlType="varchar" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="address_two" sqlType="varchar" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="city" sqlType="varchar" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="state" sqlType="varchar" precision="2" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="varchar" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="created_on" sqlType="date" precision="13" scale="0" nullable="false" jdbcType="91"/>
+      <column name="owner_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="accounts_account_pkey" columns="id"/>
+      <foreign-key name="accounts_account_owner_id_1073dc181767f41a_fk_auth_user_id" columns="owner_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="accounts_account_id_seq" schema="public" catalog="crmeasydb" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
     <table name="auth_group" schema="public" catalog="crmeasydb" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnYXV0aF9ncm91cF9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
       <column name="name" sqlType="varchar" precision="80" scale="0" nullable="false" jdbcType="12"/>
@@ -1646,6 +1673,7 @@
       <column name="is_active" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
       <column name="date_joined" sqlType="timestamptz" precision="35" scale="6" nullable="false" jdbcType="93"/>
       <primary-key name="auth_user_pkey" columns="id"/>
+      <exported-key name="accounts_account_owner_id_1073dc181767f41a_fk_auth_user_id" table="accounts_account" schema="public" catalog="crmeasydb" columns="owner_id"/>
       <exported-key name="auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id" table="auth_user_groups" schema="public" catalog="crmeasydb" columns="user_id"/>
       <exported-key name="auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id" table="auth_user_user_permissions" schema="public" catalog="crmeasydb" columns="user_id"/>
       <exported-key name="django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id" table="django_admin_log" schema="public" catalog="crmeasydb" columns="user_id"/>

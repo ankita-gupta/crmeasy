@@ -1,8 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from subscribers.views import subsciber_new
 from marketing.views import HomePage
-from accounts.views import AccountList
+from accounts.views import AccountList, AccountDetail
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -20,4 +21,5 @@ urlpatterns = patterns('',
         'django.contrib.auth.views.logout', {'next_page': '/login/'}
     ),
     url(r'^account/list/$', AccountList.as_view(),name="account_list"),
+    url(r'^account/(?P<uuid>[\w-]+)/',login_required(AccountDetail.as_view()), name="account_detail" ),
 )
