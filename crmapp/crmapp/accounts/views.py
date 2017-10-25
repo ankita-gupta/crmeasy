@@ -13,7 +13,7 @@ class AccountList(ListView):
 
     def get_queryset(self):
         try:
-            a = self.request.GET.get('account')
+            a = self.request.GET.get('account',)
         except KeyError:
             a = None
         if a:
