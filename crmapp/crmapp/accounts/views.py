@@ -45,20 +45,27 @@ class AccountDetail(DetailView):
      #    return super(AccountDetail, self).dispatch(*args, **kwargs)
 
 login_required()
-def account_cru(request):
+def account_cru(request, uuid):
+    if uuid:
+        account = get_object_or_404(Account, uuid=uuid)
+        if account.owner != request.user:
+            return HttpResponseForbidden()
+    else:
+        account = Account(owner=request.user)
     if request.POST:
-        form = AccountForm(request.post)
+        form = AccountForm(request.POST, instance = account)
         if form.is_valid():
             account = form.save(commit=False)
             account.owner = request.user
             account.save()
-            redirect_url = reverse('account_detail', args=(account.uuid))
+            redirect_url = reverse('account_detail', args=(account.uuid,))
             return HttpResponseRedirect(redirect_url)
     else:
-        form = AccountForm()
+        form = AccountForm(instance= account)
 
     context = {
         'form': form,
+        'account':account
     }
     template = 'accounts/account_cru.html'
     return render(request, template, context)

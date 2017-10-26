@@ -20,7 +20,9 @@ urlpatterns = patterns('',
     (r'^logout/$',
         'django.contrib.auth.views.logout', {'next_page': '/login/'}
     ),
-    url(r'^account/list/$', AccountList.as_view(),name="account_list"),
-    url(r'^account/(?P<uuid>[\w-]+)/',login_required(AccountDetail.as_view()), name="account_detail" ),
-    url(r'^/account/new/', account_cru, name="account_new"),
+    url(r'^account/new/', account_cru, name="account_new"),
+    url(r'^account/list/$', AccountList.as_view(), name="account_list"),
+    url(r'^account/(?P<uuid>[\w-]+)/', login_required(AccountDetail.as_view()), name="account_detail" ),
+    url(r'^account/(?P<uuid>[\w-]+)/edit', account_cru, name="account_update" ),
+
 )
