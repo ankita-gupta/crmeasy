@@ -4,9 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 
 from .models import Account
-
+from .forms import AccountForm
 
 class AccountList(ListView):
     model = Account
@@ -42,4 +44,21 @@ class AccountDetail(DetailView):
      # def dispatch(self, *args, **kwargs):
      #    return super(AccountDetail, self).dispatch(*args, **kwargs)
 
+login_required()
+def account_cru(request):
+    if request.POST:
+        form = AccountForm(request.post)
+        if form.is_valid():
+            account = form.save(commit=False)
+            account.owner = request.user
+            account.save()
+            redirect_url = reverse('account_detail', args=(account.uuid))
+            return HttpResponseRedirect(redirect_url)
+    else:
+        form = AccountForm()
 
+    context = {
+        'form': form,
+    }
+    template = 'accounts/account_cru.html'
+    return render(request, template, context)

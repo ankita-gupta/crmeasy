@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from subscribers.views import subsciber_new
 from marketing.views import HomePage
-from accounts.views import AccountList, AccountDetail
+from accounts.views import AccountList, AccountDetail, account_cru
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     ),
     url(r'^account/list/$', AccountList.as_view(),name="account_list"),
     url(r'^account/(?P<uuid>[\w-]+)/',login_required(AccountDetail.as_view()), name="account_detail" ),
+    url(r'^/account/new/', account_cru, name="account_new"),
 )
