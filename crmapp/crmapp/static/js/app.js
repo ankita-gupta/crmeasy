@@ -53,7 +53,7 @@ function resetForm($form) {
 
 // Main App
 $(document).ready(function() {
-    $(document).on("click","#gi-container .edit-account", function(){
+    $(document).on("click","#gi-container .edit-account", function(e){
         e.preventDefault();
         $('#gi-container').load($(this).attr('href'));
     });
