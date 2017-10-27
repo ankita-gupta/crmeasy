@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 
 from .models import Account
 from .forms import AccountForm
+from crmapp.contacts.models import Contact
 
 class AccountList(ListView):
     model = Account
@@ -31,7 +32,7 @@ class AccountList(ListView):
     def dispatch(self, *args, **kwargs):
         return super(AccountList, self).dispatch(*args, **kwargs)
 
-class AccountDetail(DetailView):
+class AccountDetail(DetailView, ):
      model = Account
      template_name = 'accounts/account_detail.html'
      context_object_name = 'account'
@@ -39,6 +40,12 @@ class AccountDetail(DetailView):
      def get_object(self):
         object = get_object_or_404(Account,uuid=self.kwargs.get('uuid'))
         return object
+
+     # def get_context_data(self, **kwargs):
+     #     context = super(AccountDetail, self).get_context_data(**kwargs)
+     #     print("context>>",context)
+     #     return context
+         # contacts = Contact.objects.filter(account = )
 
      # @method_decorator(login_required)
      # def dispatch(self, *args, **kwargs):

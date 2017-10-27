@@ -13,8 +13,8 @@ class Contact(models.Model):
     role = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
     email = models.EmailField()
-    account = models.ForeignKey(Account)
-    owner = models.ForeignKey(User)
+    account = models.ForeignKey(Account, related_name='contact_account')
+    owner = models.ForeignKey(User, related_name='contact_owner')
     created_on = models.DateField(auto_now_add=True)
 
     class Meta:
