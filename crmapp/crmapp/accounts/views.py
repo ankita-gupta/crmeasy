@@ -45,7 +45,7 @@ class AccountDetail(DetailView):
      #    return super(AccountDetail, self).dispatch(*args, **kwargs)
 
 login_required()
-def account_cru(request, uuid):
+def account_cru(request, uuid=None):
     if uuid:
         account = get_object_or_404(Account, uuid=uuid)
         if account.owner != request.user:
@@ -67,5 +67,8 @@ def account_cru(request, uuid):
         'form': form,
         'account':account
     }
-    template = 'accounts/account_cru.html'
+    if request.is_ajax():
+        template = 'accounts/account_item_form.html'
+    else:
+        template = 'accounts/account_cru.html'
     return render(request, template, context)
