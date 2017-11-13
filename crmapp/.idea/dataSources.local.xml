@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="PostgreSQL - crmeasydb@localhost" uuid="72aef614-e829-4263-a4fd-9e86387b8b45">
+    <data-source name="PostgreSQL - crmeasydb@localhost" uuid="43ad561b-c535-4e5d-8f67-8832569c12a1">
       <secret-storage>master_key</secret-storage>
-      <user-name>postgres</user-name>
-      <schema-pattern>crmeasydb.pg_catalog crmeasydb.public</schema-pattern>
-      <default-schemas>crmeasydb.pg_catalog crmeasydb.public</default-schemas>
+      <schema-pattern>crmeasydb.*</schema-pattern>
+      <default-schemas>crmeasydb.*</default-schemas>
     </data-source>
   </component>
 </project>

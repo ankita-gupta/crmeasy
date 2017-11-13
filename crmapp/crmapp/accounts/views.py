@@ -11,6 +11,7 @@ from .models import Account
 from .forms import AccountForm
 from crmapp.contacts.models import Contact
 
+
 class AccountList(ListView):
     model = Account
     template_name = 'accounts/account_list.html'
@@ -32,6 +33,7 @@ class AccountList(ListView):
     def dispatch(self, *args, **kwargs):
         return super(AccountList, self).dispatch(*args, **kwargs)
 
+
 class AccountDetail(DetailView, ):
      model = Account
      template_name = 'accounts/account_detail.html'
@@ -50,6 +52,7 @@ class AccountDetail(DetailView, ):
      # @method_decorator(login_required)
      # def dispatch(self, *args, **kwargs):
      #    return super(AccountDetail, self).dispatch(*args, **kwargs)
+
 
 login_required()
 def account_cru(request, uuid=None):
