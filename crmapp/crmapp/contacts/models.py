@@ -26,3 +26,7 @@ class Contact(models.Model):
     @property
     def full_name(self):
         return u'%s %s' %(self.first_name,self.last_name)
+
+    @models.permalink
+    def get_update_url(self):
+        return 'contact_update', [self.uuid]

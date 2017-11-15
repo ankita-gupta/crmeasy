@@ -27,5 +27,5 @@ urlpatterns = patterns('',
     url(r'^account/(?P<uuid>[\w-]+)/edit/$', account_cru, name="account_update" ),
     url(r'^contact/new/$', login_required(ContactCru.as_view()), name='contact_new'),
     url(r'^contact/(?P<uuid>[\w-]+)/', login_required(ContactDetail.as_view()), name='contact_detail'),
-    url(r'^contact/edit/$', login_required(ContactCru.as_view()), name='contact_update'),
+    url(r'^contact/edit/(?P<uuid>[\w-]+)/', login_required(ContactCru.as_view()), name='contact_update'),
 )
