@@ -5,7 +5,7 @@ from subscribers.views import subsciber_new
 from marketing.views import HomePage
 from accounts.views import AccountList, AccountDetail, account_cru
 from contacts.views import ContactDetail, ContactCru, ContactDelete
-from communications.views import comm_detail
+from communications.views import comm_detail, comm_cru, CommDelete
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -30,5 +30,9 @@ urlpatterns = patterns('',
     url(r'^contact/edit/(?P<uuid>[\w-]+)/', login_required(ContactCru.as_view()), name='contact_update'),
     url(r'^contact/new/$', login_required(ContactCru.as_view()), name='contact_new'),
     url(r'^contact/(?P<uuid>[\w-]+)/', login_required(ContactDetail.as_view()), name='contact_detail'),
-    url(r'^comm/(?P<uuid>[\w-]+)/', comm_detail, name='comm_detail')
+    url(r'^comm/(?P<pk>[\w-]+)/delete/$',CommDelete.as_view(), name='comm_delete'),
+    url(r'^comm/(?P<uuid>[\w-]+)/', comm_detail, name='comm_detail'),
+    url(r'^comm/new/$',comm_cru, name='comm_new'),
+    url(r'^edit/(?P<uuid>[\w-]+)/$',comm_cru, name='comm_update'),
+
 )

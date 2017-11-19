@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseForbidden
@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from .models import Account
 from .forms import AccountForm
 from crmapp.communications.models import Communication
-
+from crmapp.communications.forms import CommunicationForm
 
 class AccountList(ListView):
     model = Account
@@ -34,7 +34,7 @@ class AccountList(ListView):
         return super(AccountList, self).dispatch(*args, **kwargs)
 
 
-class AccountDetail(DetailView, ):
+class AccountDetail(UpdateView, ):
      model = Account
      template_name = 'accounts/account_detail.html'
      context_object_name = 'account'
@@ -46,8 +46,12 @@ class AccountDetail(DetailView, ):
      def get_context_data(self, **kwargs):
          context = super(AccountDetail, self).get_context_data(**kwargs)
          communications = Communication.objects.filter(account=self.object).order_by('-created_on')
-         context.update({'communications':communications})
+         form = CommunicationForm()
+         context.update({'communications':communications,'form':form})
          return context
+
+     # def post(self, request, *args, **kwargs):
+
 
      # @method_decorator(login_required)
      # def dispatch(self, *args, **kwargs):

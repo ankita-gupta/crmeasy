@@ -66,7 +66,7 @@ class ContactCru(FormView):
                 )
             else:
                 reverse_url = reverse(
-                    'crmapp.accounts.views.account_detail',
+                    'account_detail',
                     args=(self.account.uuid,)
                 )
                 return HttpResponseRedirect(reverse_url)
