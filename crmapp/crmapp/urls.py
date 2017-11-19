@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from subscribers.views import subsciber_new
 from marketing.views import HomePage
 from accounts.views import AccountList, AccountDetail, account_cru
-from contacts.views import ContactDetail, ContactCru
+from contacts.views import ContactDetail, ContactCru, ContactDelete
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -25,7 +25,8 @@ urlpatterns = patterns('',
     url(r'^account/list/$', AccountList.as_view(), name="account_list"),
     url(r'^account/(?P<uuid>[\w-]+)/$', login_required(AccountDetail.as_view()), name="account_detail" ),
     url(r'^account/(?P<uuid>[\w-]+)/edit/$', account_cru, name="account_update" ),
+    url(r'^contact/(?P<pk>[\w-]+)/delete/$',ContactDelete.as_view(), name='contact_delete'),
+    url(r'^contact/edit/(?P<uuid>[\w-]+)/', login_required(ContactCru.as_view()), name='contact_update'),
     url(r'^contact/new/$', login_required(ContactCru.as_view()), name='contact_new'),
     url(r'^contact/(?P<uuid>[\w-]+)/', login_required(ContactDetail.as_view()), name='contact_detail'),
-    url(r'^contact/edit/(?P<uuid>[\w-]+)/', login_required(ContactCru.as_view()), name='contact_update'),
 )

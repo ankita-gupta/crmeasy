@@ -30,3 +30,7 @@ class Contact(models.Model):
     @models.permalink
     def get_update_url(self):
         return 'contact_update', [self.uuid]
+
+    @models.permalink
+    def get_delete_url(self):
+        return 'contact_delete', [self.id]
